@@ -1,8 +1,15 @@
-# Starter pack: RESTful web API avec node.js et express
+# Starter pack: *RESTful* web API avec node.js et Express
 
+Un starter pack dockerisé d'une application web node.js pour développer une web API RESTful
 
-## *Getting started*
+## Prérequis
 
+- installer node.js
+- installer Docker et Compose
+
+## Lancer le projet
+
+Clôner le dépôt
 
 ## Ressources
 
