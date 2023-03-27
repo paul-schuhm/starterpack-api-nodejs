@@ -29,15 +29,6 @@ Lancer le conteneur
 docker run -p 49160:3000 -v $PWD/api:/usr/src/app -v /usr/src/app/node_modules pschuhmacher/node-rest-api nodemon ./bin/www
 ~~~
 
-Se rendre à l'URL [localhost:49160](http://localhost:49160)
-
-
-ou tester (avec curl)
-
-~~~
-
-~~~
-
 ## Lancer le projet avec Compose
 
 Démarrer le projet
@@ -46,7 +37,9 @@ Démarrer le projet
 docker-compose up -d
 ~~~
 
-Tester (avec curl)
+## Tester
+
+Se rendre à l'URL [localhost:49160](http://localhost:49160), ou tester (avec [curl](https://curl.se/))
 
 ~~~
 curl --include localhost:49160
