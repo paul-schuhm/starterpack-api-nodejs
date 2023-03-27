@@ -68,4 +68,5 @@ docker-compose down
 - [Image Docker Node](https://hub.docker.com/_/node)
 - [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
 - [Nodemon](https://www.npmjs.com/package/nodemon), outil de développement d'applications node.js pour redémarrer le process du serveur web automatiquement lorsque les sources changent
+- [Swagger Editor](https://swagger.io/docs/open-source-tools/swagger-editor/), un éditeur open source pour designer et documenter une web API RESTful (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*)
 
