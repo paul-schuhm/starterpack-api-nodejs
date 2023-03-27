@@ -15,21 +15,13 @@ rm -R .git
 git init
 ~~~
 
-## Lancer le projet avec Docker
-
-Construire l'image Docker
-
-~~~
-docker build . -t node-rest-api
-~~~
-
-Lancer le conteneur
-
-~~~
-docker run -p 49160:3000 -v $PWD/api:/usr/src/app -v /usr/src/app/node_modules pschuhmacher/node-rest-api nodemon ./bin/www
-~~~
-
 ## Lancer le projet avec Compose
+
+Dupliquer le fichier `.env.dist` et renseigner éventuellement les variables d'environnement qui vous conviennent (des valeurs par défaut sont fournies)
+
+~~~
+cp .env.dist .env
+~~~
 
 Démarrer le projet
 
@@ -39,14 +31,31 @@ docker-compose up -d
 
 ## Tester
 
-Se rendre à l'URL [localhost:49160](http://localhost:49160), ou tester (avec [curl](https://curl.se/))
+### API
+
+Se rendre à l'URL [localhost:5001](http://localhost:5001), ou tester (avec [curl](https://curl.se/))
 
 ~~~
-curl --include localhost:49160
-curl --include localhost:49160/users
+curl --include localhost:5001
+curl --include localhost:5001/users
 ~~~
+
+### Base de données
+
+Avec le client mysql
+
+~~~
+mysql -u
+~~~
+
+### Client graphique Adminer pour la base de données MySQL
+
 
 ## Arrêter le projet
+
+~~~
+docker-compose down
+~~~
 
 ## Ressources
 
