@@ -1,6 +1,6 @@
 # Starter pack: *RESTful* web API avec node.js et Express
 
-Un starter pack dockerisé d'une application web node.js pour développer une web API RESTful
+Un *starter pack* dockerisé d'une application web node.js pour développer une web API RESTful. L'API vient avec un service de base de données relationnelles (MySQL) et un client graphique (Adminer).
 
 ## Prérequis
 
