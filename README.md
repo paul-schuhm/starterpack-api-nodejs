@@ -17,11 +17,13 @@ git init
 
 ## Lancer le projet avec Compose
 
-Dupliquer le fichier `.env.dist` et renseigner éventuellement les variables d'environnement qui vous conviennent (des valeurs par défaut sont fournies)
+Dupliquer le fichier `.env.dist`
 
 ~~~
 cp .env.dist .env
 ~~~
+
+> Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
 Démarrer le projet
 
@@ -45,11 +47,14 @@ curl --include localhost:5001/users
 Avec le client mysql
 
 ~~~
-mysql -u
+mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
 ~~~
+
+>Penser à modifier la valeur du port si vous l'avez changé dans le `.env`
 
 ### Client graphique Adminer pour la base de données MySQL
 
+Se rendre à l'url [http://localhost:5003](http://localhost:5003) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut)
 
 ## Arrêter le projet
 
