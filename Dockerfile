@@ -1,13 +1,13 @@
 FROM node:19-alpine3.16
 
-WORKDIR /usr/src/myapp
+WORKDIR /usr/src/app
 
-COPY package*.json ./
+COPY api/ .
+
+RUN npm install -g nodemon
 
 RUN npm install
 
-COPY . .
+EXPOSE 3000
 
-EXPOSE 8080
-
-CMD [ "node", "server.js" ]
+CMD [ "npm", "run", "start"]
