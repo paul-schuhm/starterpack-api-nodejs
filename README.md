@@ -80,6 +80,12 @@ Générer automatiquement la documentation de vos routes avec le module Swagger
 node swagger.js
 ~~~
 
+ou
+
+~~~
+npm run swagger-autogen
+~~~
+
 Se rendre à l'URL `/doc` pour accéder à l'UI de Swagger
 
 ## Installer et servir de nouvelles dépendances
@@ -115,14 +121,15 @@ docker-compose down
 
 ### Express
 
-- [Générateur d’applications Express](https://expressjs.com/fr/starter/generator.html)
+- [Générateur d’applications Express](https://expressjs.com/fr/starter/generator.html), générer un projet pour démarrer
+- [Routage](https://expressjs.com/fr/guide/routing.html), la documentation sur le routage d'Express
 - [Pug](https://pugjs.org/api/getting-started.html), moteur de templates javascript installé par défaut avec Express
 
 ### Swagger
 
 - [Swagger UI](https://github.com/swagger-api/swagger-ui), documenter une web API RESTful (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*)
 - [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module node.js pour générer la documentation de l'API avec Express
-- [Swagger auto-gen](https://www.npmjs.com/package/swagger-autogen), module de génération *automatique* de la documentation de l'API dans une application node.js/Express
+- [Swagger auto-gen](https://www.npmjs.com/package/swagger-autogen), module de génération *automatique* de la documentation de l'API dans une application node.js/Express. Voir notamment la documentation pour documenter automatiquement les endpoints (résumé, description, paramètres)
 - [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification), un standard de description d'une web API comptabile avec REST
 
 ### SGBDR
