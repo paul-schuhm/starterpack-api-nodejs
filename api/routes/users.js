@@ -3,7 +3,7 @@ var router = express.Router();
 var connection = require('../db')
 
 /* GET users listing. */
-router.get('/', function (req, res, next) {
+router.get('/users', function (req, res, next) {
 
   connection.query('SELECT * FROM User;',  (error, rows, fields) => {
     const users = rows.map(element => {

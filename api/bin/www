@@ -9,13 +9,6 @@ var debug = require('debug')('api:server');
 var http = require('http');
 
 /**
- * Import swagger modulse
- */
-const bodyParser = require("body-parser");
-const swaggerJsdoc = require("swagger-jsdoc");
-const swaggerUi = require("swagger-ui-express");
-
-/**
  * Get port from environment and store in Express.
  */
 
@@ -27,36 +20,6 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
-
-
-/**
- * Plug swagger
- */
-
-const options = {
-  definition: {
-    openapi: "3.1.0",
-    info: {
-      title: "REST API Swagger",
-      version: "0.1.0",
-      description:
-        "This is a simple RESTful web API made with Express and documented with Swagger",
-    },
-    servers: [
-      {
-        url: "http://localhost:5001",
-      },
-    ],
-  },
-  apis: ["../routes/*.js"],
-};
-
-const specs = swaggerJsdoc(options);
-app.use(
-  "/doc",
-  swaggerUi.serve,
-  swaggerUi.setup(specs)
-);
 
 /**
  * Listen on provided port, on all network interfaces.

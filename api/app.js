@@ -5,6 +5,8 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const swaggerUi = require('swagger-ui-express')
+const swaggerFile = require('./swagger_output.json')
 
 /**
  * Connexion à la base de données
@@ -27,7 +29,13 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Enregisterment des routes
  */
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/', usersRouter);
+
+
+/**
+ * Configuration Swagger, exposition de la doc sur la route /doc
+ */
+app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
