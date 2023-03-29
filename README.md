@@ -106,4 +106,5 @@ docker-compose down
 - [mysql js](https://www.npmjs.com/package/mysql), le driver node.js pour les SGBDR MySQL
 - [mysql js, escaping output !](https://www.npmjs.com/package/mysql#escaping-query-values)
 - [Sequelize, Getting Started](https://sequelize.org/docs/v6/getting-started/), Sequelize, un ORM pour node.js
+- [Pug](https://pugjs.org/api/getting-started.html), moteur de tempaltes javascript
 
