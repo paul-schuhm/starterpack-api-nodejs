@@ -72,6 +72,16 @@ L'`host` de la base de données est le nom du service sur le réseau du projet c
 
 Pour interagir avec la base de données SQL, nous pouvons utiliser l'ORM [Sequelize](https://sequelize.org)
 
+## Documentation de l'API avec Swagger
+
+Générer automatiquement la documentation de vos routes avec le module Swagger
+
+~~~
+node swagger.js
+~~~
+
+Se rendre à l'URL `/doc` pour accéder à l'UI de Swagger
+
 ## Installer et servir de nouvelles dépendances
 
 - Stoper les containers avec Compose
@@ -97,14 +107,27 @@ docker-compose down
 
 ## Ressources
 
-- [Générateur d’applications Express](https://expressjs.com/fr/starter/generator.html)
+### Docker
+
 - [Image Docker Node](https://hub.docker.com/_/node)
 - [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
 - [Nodemon](https://www.npmjs.com/package/nodemon), outil de développement d'applications node.js pour redémarrer le process du serveur web automatiquement lorsque les sources changent
+
+### Express
+
+- [Générateur d’applications Express](https://expressjs.com/fr/starter/generator.html)
+- [Pug](https://pugjs.org/api/getting-started.html), moteur de templates javascript installé par défaut avec Express
+
+### Swagger
+
 - [Swagger UI](https://github.com/swagger-api/swagger-ui), documenter une web API RESTful (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*)
+- [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module node.js pour générer la documentation de l'API avec Express
+- [Swagger auto-gen](https://www.npmjs.com/package/swagger-autogen), module de génération *automatique* de la documentation de l'API dans une application node.js/Express
+- [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification), un standard de description d'une web API comptabile avec REST
+
+### SGBDR
+
 - [MySQL Docker Image, quick reference](https://hub.docker.com/_/mysql/)
 - [mysql js](https://www.npmjs.com/package/mysql), le driver node.js pour les SGBDR MySQL
 - [mysql js, escaping output !](https://www.npmjs.com/package/mysql#escaping-query-values)
 - [Sequelize, Getting Started](https://sequelize.org/docs/v6/getting-started/), Sequelize, un ORM pour node.js
-- [Pug](https://pugjs.org/api/getting-started.html), moteur de tempaltes javascript
-
