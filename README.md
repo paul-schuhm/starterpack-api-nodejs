@@ -132,7 +132,9 @@ docker-compose down
 
 ## Gestion des crashs
 
-Si l'appli node crash (mauvaise gestion des exceptions), **penser à enregistrer un fichier source JavaScript** pour la relancer automatiquement avec nodemon
+Si l'appli node crash (mauvaise gestion des exceptions), **penser à enregistrer un fichier source JavaScript** pour la relancer automatiquement avec nodemon.
+
+Penser à **inspecter les logs du conteneur de l'API** pour identifier les problèmes.
 
 ## Ressources
 
