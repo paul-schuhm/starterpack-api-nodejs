@@ -130,6 +130,10 @@ docker-compose up -d
 docker-compose down
 ~~~
 
+## Gestion des crashs
+
+Si l'appli node crash (mauvaise gestion des exceptions), **penser à enregistrer un fichier source JavaScript** pour la relancer automatiquement avec nodemon
+
 ## Ressources
 
 ### Docker
