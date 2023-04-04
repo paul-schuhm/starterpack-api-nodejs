@@ -8,6 +8,13 @@ router.get('/', function (req, res, next) {
   // #swagger.summary = "Page d'accueil"
 
   connection.query('SELECT * FROM User;', (error, rows, fields) => {
+
+
+    if (error) {
+      console.error('Error connecting: ' + err.stack);
+      return;
+    }
+
     const users = rows.map(element => {
       return {
         firstName: element.first_name
