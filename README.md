@@ -25,11 +25,27 @@ cp .env.dist .env
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
+Générer le fichier `swagger_output.json` (voir [la section dédiée à Swagger](#swagger))
+
+~~~
+pushd api
+npm run swagger-autogen
+popd api
+~~~
+
 Démarrer le projet
 
 ~~~
 docker-compose up -d
 ~~~
+
+Créer le schéma de la base de données test ainsi qu'un jeu de données test
+
+~~~
+mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
+~~~
+
+> Pour plus de détails voir [la section dédiée](#base-de-données).
 
 ## Tester
 
@@ -77,12 +93,14 @@ Pour interagir avec la base de données SQL, nous pouvons utiliser l'ORM [Sequel
 Générer automatiquement la documentation de vos routes avec le module Swagger
 
 ~~~
+cd api
 node swagger.js
 ~~~
 
 ou
 
 ~~~
+cd api
 npm run swagger-autogen
 ~~~
 
@@ -101,6 +119,7 @@ pushd api
 #Installer les dépendances
 npm install --save votre-dependance
 popd
+#Reconstruire le conteneur
 docker-compose build api
 docker-compose up -d
 ~~~
