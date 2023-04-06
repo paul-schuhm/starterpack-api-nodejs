@@ -2,6 +2,27 @@
 
 Un *starter pack* dockerisé d'une application web node.js pour développer une web API RESTful. L'API vient avec un service de base de données relationnelles (MySQL) et un client graphique (Adminer).
 
+- [Starter pack: *RESTful* web API avec node.js et Express](#starter-pack-restful-web-api-avec-nodejs-et-express)
+  - [Prérequis](#prérequis)
+  - [Lancer le projet avec Compose](#lancer-le-projet-avec-compose)
+  - [Tester](#tester)
+    - [API](#api)
+    - [Base de données](#base-de-données)
+    - [Client graphique Adminer pour la base de données MySQL](#client-graphique-adminer-pour-la-base-de-données-mysql)
+  - [Base de données](#base-de-données-1)
+    - [ORM](#orm)
+  - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
+  - [Installer et servir de nouvelles dépendances](#installer-et-servir-de-nouvelles-dépendances)
+  - [Arrêter le projet](#arrêter-le-projet)
+  - [Libs notables](#libs-notables)
+  - [Autorisation avec JWT](#autorisation-avec-jwt)
+  - [Ressources](#ressources)
+    - [Docker](#docker)
+    - [Express](#express)
+    - [Swagger](#swagger)
+    - [SGBDR](#sgbdr)
+
+
 ## Prérequis
 
 - installer [node.js](https://nodejs.org/en)
