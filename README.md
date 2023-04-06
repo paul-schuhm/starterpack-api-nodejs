@@ -25,37 +25,11 @@ cp .env.dist .env
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
-
 Démarrer le projet
 
 ~~~
 docker-compose up -d
 ~~~
-
-
-Générer le fichier `swagger_output.json` (voir [la section dédiée à Swagger](#swagger))
-
-~~~
-pushd api
-npm install
-npm run swagger-autogen
-popd
-~~~
-
-Créer le schéma de la base de données test ainsi qu'un jeu de données test
-
-~~~
-mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
-~~~
-
-ou directement depuis le container mysql
-
-~~~
-docker exec -i demo-rest-api-mysql sh -c 'exec mysql -uroot -p"root"' < init.sql
-~~~
-
-
-> Pour plus de détails voir [la section dédiée](#base-de-données).
 
 ## Tester
 
@@ -103,14 +77,12 @@ Pour interagir avec la base de données SQL, nous pouvons utiliser l'ORM [Sequel
 Générer automatiquement la documentation de vos routes avec le module Swagger
 
 ~~~
-cd api
 node swagger.js
 ~~~
 
 ou
 
 ~~~
-cd api
 npm run swagger-autogen
 ~~~
 
@@ -118,45 +90,12 @@ Se rendre à l'URL `/doc` pour accéder à l'UI de Swagger
 
 ## Installer et servir de nouvelles dépendances
 
-- Stoper les containers avec Compose
-- A la racine de l'application, *installer* les dépendances désirées via `npm`
-- Reconstruire le conteneur `api`
-- Relancer les containers avec Compose
+A la racine de l'application, installer les dépendances désirées *via* `npm`
 
 ~~~
-docker-compose down
 pushd api
-#Installer les dépendances
-npm install --save votre-dependance
+npm install <votre paquet>
 popd
-#Reconstruire le conteneur
-docker-compose build api
-docker-compose up -d
-~~~
-
-## Relancement automatique de l'application node avec nodemon
-
-[nodemon](https://www.npmjs.com/package/nodemon) est un outil qui aide à développer des applications node.js en redémarrant l'application à chaque fois que les sources changent (*watch*).
-
-### Windows
-
-Sur Windows, penser à modifier le fichier `docker-compose.yaml` pour ajouter l'argument `--legacy-watch` à nodemon
-
-~~~yaml
-services:
-  #La web API (node)
-  api:
-    build:
-      context: ./
-      dockerfile: Dockerfile
-    restart: always
-    volumes:
-      - ./api:/usr/src/app:rw
-    container_name: ${PROJECT_NAME}-api
-    # Penser à rajouter l'option --legacy-watch ici
-    command: "nodemon --legacy-watch ./bin/www"
-    ports:
-      - ${HOST_PORT_API}:3000
 ~~~
 
 ## Arrêter le projet
@@ -165,11 +104,17 @@ services:
 docker-compose down
 ~~~
 
-## Gestion des crashs
+## Libs notables
 
-Si l'appli node crash (mauvaise gestion des exceptions), **penser à enregistrer un fichier source JavaScript** pour la relancer automatiquement avec nodemon.
+- [bodyParser](https://www.npmjs.com/package/body-parser), un parser du corps de requête pour les applications node. On s'en sert pour parser les représentations envoyées par le client dans nos contrôleurs avec l'instruction `app.use(bodyParser.urlencoded({ extended: true }));`
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), une implémentation javascript du standard JSON Web Token, voir [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)
+- [cors](https://www.npmjs.com/package/cors), un module middleware pour gérer la politique CORS (*Cross Origin Resource Sharing*)
 
-Penser à **inspecter les logs du conteneur de l'API** pour identifier les problèmes.
+## Autorisation avec JWT
+
+>JSON Web Token (JWT) is a compact, URL-safe means of *representing claims to be transferred between two parties* (Source: RFC7519)
+
+Pour **autoriser** (et donc authentifier) l'utilisateur à interagir avec les ressources, on utilise un JSON Web Token. Implémentée dans le projet avec le package [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 
 ## Ressources
 
@@ -184,12 +129,15 @@ Penser à **inspecter les logs du conteneur de l'API** pour identifier les probl
 - [Générateur d’applications Express](https://expressjs.com/fr/starter/generator.html), générer un projet pour démarrer
 - [Routage](https://expressjs.com/fr/guide/routing.html), la documentation sur le routage d'Express
 - [Pug](https://pugjs.org/api/getting-started.html), moteur de templates javascript installé par défaut avec Express
+- [API JSON Web Token Authentication (JWT) sur Express.js](https://etienner.github.io/api-json-web-token-authentication-jwt-sur-express-js/), un bon tutoriel pour mettre en place des routes protégées par Json Web Token
+
 
 ### Swagger
 
 - [Swagger UI](https://github.com/swagger-api/swagger-ui), documenter une web API RESTful (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*)
 - [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module node.js pour générer la documentation de l'API avec Express
 - [Swagger auto-gen](https://www.npmjs.com/package/swagger-autogen), module de génération *automatique* de la documentation de l'API dans une application node.js/Express. Voir notamment la documentation pour documenter automatiquement les endpoints (résumé, description, paramètres)
+- [Swagger auto-gen: décrire des paramètres de formulaire POST](https://www.npmjs.com/package/swagger-autogen#parameters)
 - [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification), un standard de description d'une web API comptabile avec REST
 
 ### SGBDR
@@ -198,3 +146,5 @@ Penser à **inspecter les logs du conteneur de l'API** pour identifier les probl
 - [mysql js](https://www.npmjs.com/package/mysql), le driver node.js pour les SGBDR MySQL
 - [mysql js, escaping output !](https://www.npmjs.com/package/mysql#escaping-query-values)
 - [Sequelize, Getting Started](https://sequelize.org/docs/v6/getting-started/), Sequelize, un ORM pour node.js
+
+
