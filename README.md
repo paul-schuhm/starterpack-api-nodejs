@@ -46,6 +46,14 @@ Créer le schéma de la base de données test ainsi qu'un jeu de données test
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
 ~~~
 
+ou directement depuis le container mysql
+
+~~~
+docker exec -i demo-rest-api-mysql sh -c 'exec mysql -uroot -p"root"' < init.sql
+~~~
+
+> Sur windows, la syntaxe du Batch mode est la suivate `docker exec -i demo-rest-api-mysql sh -c 'exec mysql -uroot -p"root"' -e "init.sql"`
+
 > Pour plus de détails voir [la section dédiée](#base-de-données).
 
 ## Tester
