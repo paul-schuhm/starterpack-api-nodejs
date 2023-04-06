@@ -32,10 +32,12 @@ Démarrer le projet
 docker-compose up -d
 ~~~
 
+
 Générer le fichier `swagger_output.json` (voir [la section dédiée à Swagger](#swagger))
 
 ~~~
 pushd api
+npm install
 npm run swagger-autogen
 popd
 ~~~
@@ -52,7 +54,6 @@ ou directement depuis le container mysql
 docker exec -i demo-rest-api-mysql sh -c 'exec mysql -uroot -p"root"' < init.sql
 ~~~
 
-> Sur windows, la syntaxe du Batch mode est la suivate `docker exec -i demo-rest-api-mysql sh -c 'exec mysql -uroot -p"root"' -e "init.sql"`
 
 > Pour plus de détails voir [la section dédiée](#base-de-données).
 
@@ -131,6 +132,31 @@ popd
 #Reconstruire le conteneur
 docker-compose build api
 docker-compose up -d
+~~~
+
+## Relancement automatique de l'application node avec nodemon
+
+[nodemon](https://www.npmjs.com/package/nodemon) est un outil qui aide à développer des applications node.js en redémarrant l'application à chaque fois que les sources changent (*watch*).
+
+### Windows
+
+Sur Windows, penser à modifier le fichier `docker-compose.yaml` pour ajouter l'argument `--legacy-watch` à nodemon
+
+~~~yaml
+services:
+  #La web API (node)
+  api:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    restart: always
+    volumes:
+      - ./api:/usr/src/app:rw
+    container_name: ${PROJECT_NAME}-api
+    # Penser à rajouter l'option --legacy-watch ici
+    command: "nodemon --legacy-watch ./bin/www"
+    ports:
+      - ${HOST_PORT_API}:3000
 ~~~
 
 ## Arrêter le projet
