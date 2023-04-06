@@ -25,18 +25,19 @@ cp .env.dist .env
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
-Générer le fichier `swagger_output.json` (voir [la section dédiée à Swagger](#swagger))
-
-~~~
-pushd api
-npm run swagger-autogen
-popd api
-~~~
 
 Démarrer le projet
 
 ~~~
 docker-compose up -d
+~~~
+
+Générer le fichier `swagger_output.json` (voir [la section dédiée à Swagger](#swagger))
+
+~~~
+pushd api
+npm run swagger-autogen
+popd
 ~~~
 
 Créer le schéma de la base de données test ainsi qu'un jeu de données test
