@@ -9,7 +9,7 @@ router.get('/', function (req, res, next) {
 
   connection.query('SELECT * FROM User;', (error, rows, fields) => {
 
-
+    
     if (error) {
       console.error('Error connecting: ' + err.stack);
       return;
