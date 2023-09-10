@@ -10,10 +10,11 @@ services:
     volumes:
       - ./api:/usr/src/app:rw
     container_name: ${PROJECT_NAME}-api
-    command: "nodemon ./bin/www"
     ports:
       - ${HOST_PORT_API}:3000
-      
+    command: "nodemon ./bin/www"
+    depends_on:
+      - db  
   # La base de données relationnelle (ici SGBD MySQL)
   db:
     image: mysql:5.7

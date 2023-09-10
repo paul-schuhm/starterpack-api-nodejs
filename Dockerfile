@@ -4,10 +4,6 @@ WORKDIR /usr/src/app
 
 COPY api/ .
 
-# RUN npm install -g nodemon
-
-# RUN npm install
-
-# RUN npm run swagger-autogen
+RUN npm install -g nodemon
 
 EXPOSE 3000
