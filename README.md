@@ -14,6 +14,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
   - [Installer et servir de nouvelles dépendances](#installer-et-servir-de-nouvelles-dépendances)
   - [Arrêter le projet](#arrêter-le-projet)
+  - [Améliorations](#améliorations)
   - [Libs notables](#libs-notables)
   - [Autorisation avec JWT](#autorisation-avec-jwt)
   - [Ressources](#ressources)
@@ -135,6 +136,10 @@ popd
 ~~~
 docker-compose down
 ~~~
+
+## Améliorations
+
+Se débarrasser des étapes avant la dockerisation du projet (installation des dépendances). Le problème réside dans le fait que le volume monté *écrase* les fichiers lors de la construction de l'image. On ne peut donc pas en l'état simplement les déplacer dans l'image Docker.
 
 ## Libs notables
 
