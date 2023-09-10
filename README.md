@@ -46,6 +46,15 @@ cp .env.dist .env
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
+Installer les dépendances de l'application node et générer la doc swagger
+
+~~~
+pushd api
+npm install
+npm run swagger-autogen
+popd
+~~~
+
 Démarrer le projet
 
 ~~~

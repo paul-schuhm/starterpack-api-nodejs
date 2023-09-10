@@ -6,9 +6,9 @@ const mysql = require('mysql')
 
 const connection = mysql.createConnection({
     host: 'db',
+    database: 'mydb',
     user: 'user',
     password: 'password',
-    database: 'mydb'
 })
 
 connection.connect()
