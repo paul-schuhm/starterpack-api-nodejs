@@ -8,4 +8,6 @@ RUN npm install -g nodemon
 
 RUN npm install
 
+RUN npm run swagger-autogen
+
 EXPOSE 3000

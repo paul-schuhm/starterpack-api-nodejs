@@ -83,7 +83,7 @@ mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
 
 ### Client graphique Adminer pour la base de données MySQL
 
-Se rendre à l'url [http://localhost:5003](http://localhost:5003) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut)
+Se rendre à l'url [http://localhost:5003](http://localhost:5003) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut)
 
 ## Base de données
 
