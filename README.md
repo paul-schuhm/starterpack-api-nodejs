@@ -16,7 +16,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Installer et servir de nouvelles dépendances](#installer-et-servir-de-nouvelles-dépendances)
   - [Arrêter le projet](#arrêter-le-projet)
   - [Améliorations](#améliorations)
-  - [Libs notables](#libs-notables)
+  - [Modules Node.Js notables](#modules-nodejs-notables)
   - [Autorisation avec JWT](#autorisation-avec-jwt)
   - [Ressources](#ressources)
     - [Docker](#docker)
@@ -82,7 +82,7 @@ curl --include localhost:5001/users
 
 ### Base de données
 
-Avec le client mysql
+Avec le client mysql (depuis la machine hôte) :
 
 ~~~
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
@@ -96,13 +96,45 @@ mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
 
 >Penser à modifier la valeur du port si vous l'avez changé dans le `.env`
 
+>*Machine hôte* : la machine sur laquelle s’exécute les conteneurs Docker, *votre* machine
+
 ### Client graphique Adminer pour la base de données MySQL
 
 Se rendre à l'url [http://localhost:5003](http://localhost:5003) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut)
 
 ## Base de données
 
-L'`host` de la base de données est le nom du service sur le réseau du projet crée par Docker, soit `db`.
+Pour accéder à la base de données :
+
+- *Depuis* un autre conteneur (Node.js, Adminer) : `host` est `db`, le nom du service sur le réseau Docker
+- *Depuis* la machine hôte (une application node, PHP exécutée sur votre machine, etc.) : `host` est `localhost` ou `127.0.0.1`. Préférer utiliser `127.0.0.1` plutôt que `localhost` pour éviter des conflits de configuration avec le fichier [socket](https://www.jetbrains.com/help/datagrip/how-to-connect-to-mysql-with-unix-sockets.html) (interface de connexion sous forme de fichier sur les systèmes UNIX) d'une potentielle installation d'un serveur MySQL sur votre machine hôte.
+
+<!-- 
+Depuis un script PHP sur la machine hote : 
+
+- new PDO('mysql:host=localhost:5002;dbname=mydb', $user, $pass);
+- new PDO('mysql:host=127.0.0.1:5002;dbname=mydb', $user, $pass);
+- new PDO('mysql:host=127.0.0.1;dbname=mydb;port=5002', $user, $pass);
+- new PDO('mysql:host=localhost;dbname=mydb;port=5002', $user, $pass);, ici le port est ignoré et la connexion se fait par le socket de l'installation de mysql sur ma machine hote. Donc, le script PHP ne requête pas le serveur MySQL sur le conteneur mais celui sur ma machine hote. Cela se voit si on arrete le service MySQL sur la machine hote (systemctl stop/restart mysql)
+~~~php
+//Exemple en PHP
+<?php
+$user='root';
+$pass='root';
+$dbh = new PDO('mysql:host=127.0.0.1;port=5002;dbname=mydb', $user, $pass);
+$ps = $dbh->query('SELECT * FROM User;');
+$users = $ps->fetchAll();
+var_dump($users);
+~~~
+
+Différence entre utiliser 127.0.0.1 et localhost :
+
+Lorsque vous utilisez l'hôte "localhost", PDO essaie de se connecter à MySQL en utilisant un socket local plutôt que par TCP/IP. Le chemin du socket varie en fonction de la configuration de MySQL et de votre système.
+
+Lorsque vous utilisez "127.0.0.1" comme hôte, PDO se connecte à MySQL en utilisant TCP/IP sur le port par défaut (généralement 3306) au lieu d'utiliser un socket local, sauf si le port est spécifié dans le DSN. Cela peut contourner les problèmes liés à la résolution du nom de socket local.
+
+En conclusion : préférer utiliser 127.0.0.1 plutot que localhost pout s'épargner des conflits de configuration et être sûr de requêter le serveur MySQL conteneurisé.
+ -->
 
 ### ORM
 
@@ -146,7 +178,7 @@ docker-compose down
 
 Se débarrasser des étapes *avant* la dockerisation du projet (installation des dépendances). Le problème réside dans le fait que le volume monté *écrase* les fichiers lors de la construction de l'image. On ne peut donc pas en l'état simplement les déplacer dans l'image Docker.
 
-## Libs notables
+## Modules Node.Js notables
 
 - [bodyParser](https://www.npmjs.com/package/body-parser), un parser du corps de requête pour les applications node. On s'en sert pour parser les représentations envoyées par le client dans nos contrôleurs avec l'instruction `app.use(bodyParser.urlencoded({ extended: true }));`
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), une implémentation javascript du standard JSON Web Token, voir [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)
