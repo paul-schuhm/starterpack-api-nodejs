@@ -12,7 +12,7 @@ services:
     container_name: ${PROJECT_NAME}-api
     ports:
       - ${HOST_PORT_API}:3000
-    command: "nodemon ./bin/www"
+    command: "node --watch ./bin/www"
     depends_on:
       - db  
   # La base de données relationnelle (ici SGBD MySQL)

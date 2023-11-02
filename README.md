@@ -12,6 +12,9 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
     - [Client graphique Adminer pour la base de données MySQL](#client-graphique-adminer-pour-la-base-de-données-mysql)
   - [Base de données](#base-de-données-1)
     - [ORM](#orm)
+  - [Debuger lors du développement](#debuger-lors-du-développement)
+    - [En ligne de commande avec docker](#en-ligne-de-commande-avec-docker)
+    - [Avec Visual Studio Code](#avec-visual-studio-code)
   - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
   - [Installer et servir de nouvelles dépendances](#installer-et-servir-de-nouvelles-dépendances)
   - [Arrêter le projet](#arrêter-le-projet)
@@ -139,6 +142,22 @@ En conclusion : préférer utiliser 127.0.0.1 plutot que localhost pout s'éparg
 ### ORM
 
 Pour interagir avec la base de données SQL, nous pouvons utiliser l'ORM [Sequelize](https://sequelize.org)
+
+## Debuger lors du développement
+
+Inspecter les *logs* du conteneur Docker qui contiennent tout ce qui est écrit sur la sortie standard (avec `console.log()`). Les sources de l'application Node.js sont *watchées*, donc à chaque modification d'un fichier source l'application redémarre pour les prendre en compte automatiquement
+
+### En ligne de commande avec docker
+
+~~~bash
+#Suivi en temps réel des logs
+docker logs -f demo-rest-api-api 
+~~~
+
+### Avec Visual Studio Code
+
+- Installer l'[extension officielle Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
+- Click droit sur le conteneur `demo-rest-api-api` qui héberge l'application Node.js,  puis `View Logs`
 
 ## Documentation de l'API avec Swagger
 
