@@ -112,10 +112,10 @@ Pour accéder à la base de données :
 <!-- 
 Depuis un script PHP sur la machine hote : 
 
-- new PDO('mysql:host=localhost:5002;dbname=mydb', $user, $pass);
-- new PDO('mysql:host=127.0.0.1:5002;dbname=mydb', $user, $pass);
-- new PDO('mysql:host=127.0.0.1;dbname=mydb;port=5002', $user, $pass);
-- new PDO('mysql:host=localhost;dbname=mydb;port=5002', $user, $pass);, ici le port est ignoré et la connexion se fait par le socket de l'installation de mysql sur ma machine hote. Donc, le script PHP ne requête pas le serveur MySQL sur le conteneur mais celui sur ma machine hote. Cela se voit si on arrete le service MySQL sur la machine hote (systemctl stop/restart mysql)
+- new PDO('mysql:host=localhost:5002;dbname=mydb', $user, $pass); OK
+- new PDO('mysql:host=127.0.0.1:5002;dbname=mydb', $user, $pass); OK
+- new PDO('mysql:host=127.0.0.1;dbname=mydb;port=5002', $user, $pass); OK
+- new PDO('mysql:host=localhost;dbname=mydb;port=5002', $user, $pass); ERREUR ! Ici le port est ignoré et la connexion se fait par le socket de l'installation de mysql sur ma machine hote. Donc, le script PHP ne requête pas le serveur MySQL sur le conteneur mais celui sur ma machine hote. Cela se voit si on arrete le service MySQL sur la machine hote (systemctl stop/restart mysql)
 ~~~php
 //Exemple en PHP
 <?php
