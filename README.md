@@ -6,6 +6,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Prérequis](#prérequis)
   - [Lancer le projet avec Compose](#lancer-le-projet-avec-compose)
   - [Tester](#tester)
+    - [Erreur connue au démarrage](#erreur-connue-au-démarrage)
     - [API](#api)
     - [Base de données](#base-de-données)
     - [Client graphique Adminer pour la base de données MySQL](#client-graphique-adminer-pour-la-base-de-données-mysql)
@@ -64,6 +65,8 @@ docker-compose up -d
 
 ## Tester
 
+### Erreur connue au démarrage
+
 **Il se peut que le serveur MySQl mette un peu de temps à démarrer, résultant en une erreur (`ECONNREFUSED`) de la tentative de connexion de l'application node qui est déjà active. Il suffit de sauvegarder un fichier source js (par exemple `app.js`) pour réinitialiser l'état de l'application et de la connexion à MySQL**
 
 ### API
@@ -109,6 +112,8 @@ Pour interagir avec la base de données SQL, nous pouvons utiliser l'ORM [Sequel
 
 Générer automatiquement la documentation de vos routes avec le module Swagger
 
+Placez-vous dans le dossier `api` puis
+
 ~~~
 node swagger.js
 ~~~
@@ -139,13 +144,14 @@ docker-compose down
 
 ## Améliorations
 
-Se débarrasser des étapes avant la dockerisation du projet (installation des dépendances). Le problème réside dans le fait que le volume monté *écrase* les fichiers lors de la construction de l'image. On ne peut donc pas en l'état simplement les déplacer dans l'image Docker.
+Se débarrasser des étapes *avant* la dockerisation du projet (installation des dépendances). Le problème réside dans le fait que le volume monté *écrase* les fichiers lors de la construction de l'image. On ne peut donc pas en l'état simplement les déplacer dans l'image Docker.
 
 ## Libs notables
 
 - [bodyParser](https://www.npmjs.com/package/body-parser), un parser du corps de requête pour les applications node. On s'en sert pour parser les représentations envoyées par le client dans nos contrôleurs avec l'instruction `app.use(bodyParser.urlencoded({ extended: true }));`
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), une implémentation javascript du standard JSON Web Token, voir [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)
 - [cors](https://www.npmjs.com/package/cors), un module middleware pour gérer la politique CORS (*Cross Origin Resource Sharing*)
+- [mysql2](https://www.npmjs.com/package/mysql2)
 
 ## Autorisation avec JWT
 
