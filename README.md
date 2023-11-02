@@ -85,10 +85,7 @@ curl --include localhost:5001/users
 
 ### Base de données
 
-La base de données vient avec deux utilisateurs par défaut :
 
-- `root` (administrateur), mot de passe : `root`
-- `user` (utilisateur lambda), mot de passe : `password`
 
 Avec le client mysql (depuis la machine hôte) :
 
@@ -114,10 +111,15 @@ Se rendre à l'url [http://localhost:5003](http://localhost:5003) et se connecte
 
 ## Base de données
 
+La base de données vient avec deux utilisateurs par défaut :
+
+- `root` (administrateur), mot de passe : `root`
+- `user` (utilisateur lambda), mot de passe : `password`
+
 Pour accéder à la base de données :
 
 - *Depuis* un autre conteneur (Node.js, Adminer) : `host` est `db`, le nom du service sur le réseau Docker
-- *Depuis* la machine hôte (une application node, PHP exécutée sur votre machine, etc.) : `host` est `localhost` ou `127.0.0.1`. Préférer utiliser l'adresse IP `127.0.0.1` plutôt que son alias `localhost` pour faire référence à votre machine (interface réseau qui) afin éviter des potentiels conflits de configuration avec le fichier [socket](https://www.jetbrains.com/help/datagrip/how-to-connect-to-mysql-with-unix-sockets.html) (interface de connexion sous forme de fichier sur les systèmes UNIX) du serveur MySQL installé sur votre machine hôte (si c'est le cas).
+- *Depuis* la machine hôte (une application node, PHP exécutée sur votre machine, etc.) : `host` est `localhost` ou `127.0.0.1`. **Préférer utiliser l'adresse IP `127.0.0.1` plutôt que son alias `localhost`** pour faire référence à votre machine (interface réseau qui) afin éviter des potentiels conflits de configuration avec le fichier [socket](https://www.jetbrains.com/help/datagrip/how-to-connect-to-mysql-with-unix-sockets.html) (interface de connexion sous forme de fichier sur les systèmes UNIX) du serveur MySQL installé sur votre machine hôte (si c'est le cas).
 
 <!-- 
 Depuis un script PHP sur la machine hote : 
