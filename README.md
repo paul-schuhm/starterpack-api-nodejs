@@ -85,15 +85,22 @@ curl --include localhost:5001/users
 
 ### Base de données
 
+La base de données vient avec deux utilisateurs par défaut :
+
+- `root` (administrateur), mot de passe : `root`
+- `user` (utilisateur lambda), mot de passe : `password`
+
 Avec le client mysql (depuis la machine hôte) :
 
-~~~
+~~~bash
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
+mysql> -- Lister les utilisateurs MySQL
+mysql> SELECT user FROM mysql.user;
 ~~~
 
 Pour éxecuter un script SQL en *Batch mode*
 
-~~~
+~~~bash
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
 ~~~
 
