@@ -19,6 +19,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Installer et servir de nouvelles dépendances](#installer-et-servir-de-nouvelles-dépendances)
   - [Arrêter le projet](#arrêter-le-projet)
   - [Améliorations](#améliorations)
+  - [Conseils pour le développement](#conseils-pour-le-développement)
   - [Modules Node.Js notables](#modules-nodejs-notables)
   - [Autorisation avec JWT](#autorisation-avec-jwt)
   - [Ressources](#ressources)
@@ -80,12 +81,10 @@ Se rendre à l'URL [localhost:5001](http://localhost:5001), ou tester (avec [cur
 # Web humain (HTML)
 curl --include localhost:5001
 # API (JSON)
-curl --include localhost:5001/users
+curl localhost:5001
 ~~~
 
 ### Base de données
-
-
 
 Avec le client mysql (depuis la machine hôte) :
 
@@ -93,9 +92,10 @@ Avec le client mysql (depuis la machine hôte) :
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
 mysql> -- Lister les utilisateurs MySQL
 mysql> SELECT user FROM mysql.user;
+mysql> SELECT * FROM User;
 ~~~
 
-Pour éxecuter un script SQL en *Batch mode*
+Pour exécuter un script SQL en *Batch mode*
 
 ~~~bash
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
@@ -205,6 +205,13 @@ docker-compose down
 ## Améliorations
 
 Se débarrasser des étapes *avant* la dockerisation du projet (installation des dépendances). Le problème réside dans le fait que le volume monté *écrase* les fichiers lors de la construction de l'image. On ne peut donc pas en l'état simplement les déplacer dans l'image Docker.
+
+## Conseils pour le développement
+
+- Ouvrez une connexion MySQL pendant votre développement pour tester vos requêtes *avant* de les intégrer dans voter code
+- Utiliser cURL pour tester rapidement vos requêtes HTTP. Ouvrez par exemple deux terminaux, l'un avec cURL et l'autre avec les logs de l'API pour débuger facilement votre système
+- Installer le module `dotenv` pour placer le DSN (informations de connexion à la base) en dehors du code
+- Pour tester des enchaînements de requêtes, écrivez un script SQL capable de remettre la base dans un état initial et contenant les requêtes à tester et un autre script pour effectuer les requêtes HTTP, et exécuter le tout en *une commande*
 
 ## Modules Node.Js notables
 

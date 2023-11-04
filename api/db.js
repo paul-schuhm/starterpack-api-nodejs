@@ -2,22 +2,29 @@
  * Export et test de la connexion à la base de données MySQL
  */
 
-const mysql = require('mysql2')
+//Module mysql2 avec l'API des promesses
+const mysql = require('mysql2/promise');
 
-const connection = mysql.createConnection({
+//On utilise l'utilisateur 'user' qui a des droits restreints (DQL, DML)
+//Remarque : il faudrait déplacer le DSN en dehors du code dans un fichier d'environnement (laissé en exercice)
+const dsn = {
     host: 'db',
     database: 'mydb',
     user: 'user',
     password: 'password',
-})
+}
 
-connection.connect()
+/**
+ * Une simple fonction test de la connexion à MySQL
+ */
+async function testConnexion() {
+    const conn = await mysql.createConnection(dsn);
+    const [res] = await conn.execute('SELECT ? + ? AS solution', [1, 1]);
+    console.log(res)
+}
 
-connection.query('SELECT 1 + 2 AS solution', (err, rows, fields) => {
-    if (err) throw err
-    console.log('The solution is: ', rows[0].solution)
-})
+testConnexion();
 
 
-// connection.end()
-module.exports = connection
+module.exports = { dsn, mysql }
+

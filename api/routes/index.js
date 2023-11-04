@@ -1,18 +1,17 @@
 var express = require('express');
 var router = express.Router();
-var connection = require('../db');
+var db = require('../db');
 
 /* GET home page. */
-router.get('/', function (req, res, next) {
+router.get('/', async function (req, res, next) {
 
   // #swagger.summary = "Page d'accueil"
 
-  connection.query('SELECT * FROM User;', (error, rows, fields) => {
+  const conn = await db.mysql.createConnection(db.dsn);
 
-    if (error) {
-      console.error('Error connecting: ' + error.stack);
-      return;
-    }
+  try {
+    
+    const [rows] = await conn.execute('SELECT * FROM User');
 
     const users = rows.map(element => {
       return {
@@ -20,8 +19,12 @@ router.get('/', function (req, res, next) {
       }
     });
     res.render('index', { title: 'RESTful web api', 'users': users });
-  })
 
+  } catch (error) {
+    console.error('Error connecting: ' + error.stack);
+    res.status(500).json({ "msg": "Nous rencontrons des difficultés, merci de réessayer plus tard." });
+
+  }
 });
 
 module.exports = router;

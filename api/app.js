@@ -3,15 +3,10 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
+var indexRouter = require('./routes/index');
 
-/**
- * Connexion à la base de données
- */
-var connection = require('./db')
 
 var app = express();
 
@@ -29,7 +24,6 @@ app.use(express.static(path.join(__dirname, 'public')));
  * Enregistrement des routes
  */
 app.use('/', indexRouter);
-app.use('/', usersRouter);
 
 
 /**
