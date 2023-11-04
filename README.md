@@ -27,6 +27,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
     - [Express](#express)
     - [Swagger](#swagger)
     - [SGBDR](#sgbdr)
+    - [Adminer](#adminer)
 
 
 ## Prérequis
@@ -90,15 +91,21 @@ Avec le client mysql (depuis la machine hôte) :
 
 ~~~bash
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
-mysql> -- Lister les utilisateurs MySQL
-mysql> SELECT user FROM mysql.user;
-mysql> SELECT * FROM User;
+~~~
+
+Puis, dans le repl MySQL (session ouverte avec la commande précédente)
+
+~~~SQL
+-- Lister les utilisateurs MySQL
+SELECT user FROM mysql.user;
+-- Lister les users dans la base de départ
+SELECT * FROM User;
 ~~~
 
 Pour exécuter un script SQL en *Batch mode*
 
 ~~~bash
-mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
+mysql -uroot -p -Dmydb -h127.0.0.1 -P5002 < script.sql
 ~~~
 
 >Penser à modifier la valeur du port si vous l'avez changé dans le `.env`
@@ -107,7 +114,9 @@ mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002 < script.sql
 
 ### Client graphique Adminer pour la base de données MySQL
 
-Se rendre à l'url [http://localhost:5003](http://localhost:5003) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut)
+Le starterpack vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données à interface graphique, simple et puissant.
+
+Se rendre sur l'URL [http://localhost:5003](http://localhost:5003) (par défaut) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut)
 
 ## Base de données
 
@@ -231,8 +240,9 @@ Pour **autoriser** (et donc authentifier) l'utilisateur à interagir avec les re
 ### Docker
 
 - [Image Docker Node](https://hub.docker.com/_/node)
+- [Image Docker MySQL](https://hub.docker.com/_/mysql)
+- [Image Docker Adminer](https://hub.docker.com/_/adminer/)
 - [Dockerizing a Node.js web app](https://nodejs.org/en/docs/guides/nodejs-docker-webapp)
-- [Nodemon](https://www.npmjs.com/package/nodemon), outil de développement d'applications node.js pour redémarrer le process du serveur web automatiquement lorsque les sources changent
 
 ### Express
 
@@ -240,7 +250,6 @@ Pour **autoriser** (et donc authentifier) l'utilisateur à interagir avec les re
 - [Routage](https://expressjs.com/fr/guide/routing.html), la documentation sur le routage d'Express
 - [Pug](https://pugjs.org/api/getting-started.html), moteur de templates javascript installé par défaut avec Express
 - [API JSON Web Token Authentication (JWT) sur Express.js](https://etienner.github.io/api-json-web-token-authentication-jwt-sur-express-js/), un bon tutoriel pour mettre en place des routes protégées par Json Web Token
-
 
 ### Swagger
 
@@ -257,4 +266,6 @@ Pour **autoriser** (et donc authentifier) l'utilisateur à interagir avec les re
 - [mysql js, escaping output !](https://www.npmjs.com/package/mysql#escaping-query-values)
 - [Sequelize, Getting Started](https://sequelize.org/docs/v6/getting-started/), Sequelize, un ORM pour node.js
 
+### Adminer
 
+- [Adminer](https://www.adminer.org/)
