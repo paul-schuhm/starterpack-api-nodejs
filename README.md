@@ -262,9 +262,8 @@ Pour **autoriser** (et donc authentifier) l'utilisateur à interagir avec les re
 ### SGBDR
 
 - [MySQL Docker Image, quick reference](https://hub.docker.com/_/mysql/)
-- [mysql js](https://www.npmjs.com/package/mysql), le driver node.js pour les SGBDR MySQL
-- [mysql js, escaping output !](https://www.npmjs.com/package/mysql#escaping-query-values)
-- [Sequelize, Getting Started](https://sequelize.org/docs/v6/getting-started/), Sequelize, un ORM pour node.js
+- [mysql2](https://www.npmjs.com/package/mysql2), le driver node.js pour le SGBDR MySQL qui implémente l'API des promesses (contrairement à [mysql](https://www.npmjs.com/package/mysql))
+- [Sequelize, Getting Started](https://sequelize.org/docs/v6/getting-started/), Sequelize, un ORM pour Node.js
 
 ### Adminer
 
