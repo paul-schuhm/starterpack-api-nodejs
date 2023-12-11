@@ -6,7 +6,6 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Prérequis](#prérequis)
   - [Lancer le projet avec Compose](#lancer-le-projet-avec-compose)
   - [Tester](#tester)
-    - [Erreur connue au démarrage](#erreur-connue-au-démarrage)
     - [API](#api)
     - [Base de données](#base-de-données)
     - [Client graphique Adminer pour la base de données MySQL](#client-graphique-adminer-pour-la-base-de-données-mysql)
@@ -69,10 +68,6 @@ docker-compose up -d
 ~~~
 
 ## Tester
-
-### Erreur connue au démarrage
-
-**Il se peut que le serveur MySQl mette un peu de temps à démarrer, résultant en une erreur (`ECONNREFUSED`) de la tentative de connexion de l'application node qui est déjà active. Il suffit de sauvegarder un fichier source js (par exemple `app.js`) pour réinitialiser l'état de l'application et de la connexion à MySQL**
 
 ### API
 
