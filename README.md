@@ -31,20 +31,19 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
 
 ## Prérequis
 
-- installer [node.js](https://nodejs.org/en)
-- installer [Docker](https://www.docker.com/get-started/) et [Compose](https://docs.docker.com/compose/)
-- clôner le dépôt et se placer à la racine du projet
+- Installer [Docker](https://www.docker.com/get-started/) et [Compose](https://docs.docker.com/compose/)
+- [Cloner le dépôt](https://github.com/paul-schuhm/starterpack-api-nodejs) et se placer à la racine du projet;
 
 >N'oubliez pas de supprimer le dossier `.git` si vous désirez créer votre propre dépôt à partir des sources
 
-~~~
+~~~bash
 rm -R .git
 git init
 ~~~
 
 ## Lancer le projet avec Compose
 
-Dupliquer le fichier `.env.dist`
+1. **Dupliquer** le fichier `.env.dist`
 
 ~~~
 cp .env.dist .env
@@ -52,16 +51,16 @@ cp .env.dist .env
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
-Installer les dépendances de l'application node et générer la doc swagger
+2. **Installer les dépendances de l'application Node** et **générer la doc swagger**
 
-~~~
+~~~bash
 pushd api
 npm install
 npm run swagger-autogen
 popd
 ~~~
 
-Démarrer le projet
+3. **Démarrer le projet**
 
 ~~~
 docker-compose up -d
@@ -88,6 +87,9 @@ Avec le client mysql (depuis la machine hôte) :
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
 ~~~
 
+>*Machine hôte* : la machine sur laquelle s’exécute les conteneurs Docker, *votre* machine
+
+
 Puis, dans le repl MySQL (session ouverte avec la commande précédente)
 
 ~~~SQL
@@ -105,13 +107,11 @@ mysql -uroot -p -Dmydb -h127.0.0.1 -P5002 < script.sql
 
 >Penser à modifier la valeur du port si vous l'avez changé dans le `.env`
 
->*Machine hôte* : la machine sur laquelle s’exécute les conteneurs Docker, *votre* machine
-
 ### Client graphique Adminer pour la base de données MySQL
 
-Le starterpack vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données à interface graphique, simple et puissant.
+Le starterpack vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données avec interface graphique, simple et puissant.
 
-Se rendre sur l'URL [http://localhost:5003](http://localhost:5003) (par défaut) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut)
+Se rendre sur l'URL [http://localhost:5003](http://localhost:5003) (par défaut) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut).
 
 ## Base de données
 
@@ -120,9 +120,9 @@ La base de données vient avec deux utilisateurs par défaut :
 - `root` (administrateur), mot de passe : `root`
 - `user` (utilisateur lambda), mot de passe : `password`
 
-Pour accéder à la base de données :
+Pour accéder à la base de données:
 
-- *Depuis* un autre conteneur (Node.js, Adminer) : `host` est `db`, le nom du service sur le réseau Docker
+- *Depuis* un autre conteneur (Node.js, Adminer) : `host` est `db`, le nom du service sur le réseau Docker;
 - *Depuis* la machine hôte (une application node, PHP exécutée sur votre machine, etc.) : `host` est `localhost` ou `127.0.0.1`. **Préférer utiliser l'adresse IP `127.0.0.1` plutôt que son alias `localhost`** pour faire référence à votre machine (interface réseau qui) afin éviter des potentiels conflits de configuration avec le fichier [socket](https://www.jetbrains.com/help/datagrip/how-to-connect-to-mysql-with-unix-sockets.html) (interface de connexion sous forme de fichier sur les systèmes UNIX) du serveur MySQL installé sur votre machine hôte (si c'est le cas).
 
 <!-- 
@@ -174,25 +174,25 @@ docker logs -f demo-rest-api-api
 
 ## Documentation de l'API avec Swagger
 
-Générer automatiquement la documentation de vos routes avec le module Swagger
+Générer automatiquement la documentation de vos routes avec le module [swagger-autogen](https://www.npmjs.com/package/swagger-autogen) (déjà installé)
 
 Placez-vous dans le dossier `api` puis
 
-~~~
+~~~bash
 node swagger.js
 ~~~
 
 ou
 
-~~~
+~~~bash
 npm run swagger-autogen
 ~~~
 
-Se rendre à l'URL `/doc` pour accéder à l'UI de Swagger
+Se rendre à l'URL `/doc` pour accéder à l'UI de Swagger et à la documentation interactive de votre API.
 
 ## Installer et servir de nouvelles dépendances
 
-A la racine de l'application, installer les dépendances désirées *via* `npm`
+Vous pouvez installer de nouvelles dépendances au besoin. À la racine de l'application, installer les dépendances désirées *via* `npm`:
 
 ~~~
 pushd api
@@ -200,10 +200,12 @@ npm install <votre paquet>
 popd
 ~~~
 
+> Inutile de redémarrer le conteneur, `api` est un chemin monté sur le conteneur.
+
 ## Arrêter le projet
 
-~~~
-docker-compose down
+~~~bash
+docker compose down
 ~~~
 
 ## Améliorations
