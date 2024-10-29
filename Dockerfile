@@ -8,4 +8,6 @@ COPY api/ .
 
 RUN npm install
 
+RUN npm run swagger-autogen
+
 EXPOSE 3000

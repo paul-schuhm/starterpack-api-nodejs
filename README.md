@@ -15,9 +15,8 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
     - [En ligne de commande avec docker](#en-ligne-de-commande-avec-docker)
     - [Avec Visual Studio Code](#avec-visual-studio-code)
   - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
-  - [Installer et servir de nouvelles dépendances](#installer-et-servir-de-nouvelles-dépendances)
+  - [Installer de nouvelles dépendances, inspecter les dépendances](#installer-de-nouvelles-dépendances-inspecter-les-dépendances)
   - [Arrêter le projet](#arrêter-le-projet)
-  - [Améliorations](#améliorations)
   - [Conseils pour le développement](#conseils-pour-le-développement)
   - [Modules Node.Js notables](#modules-nodejs-notables)
   - [Autorisation avec JWT](#autorisation-avec-jwt)
@@ -45,22 +44,13 @@ git init
 
 1. **Dupliquer** le fichier `.env.dist`
 
-~~~
+~~~bash
 cp .env.dist .env
 ~~~
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
-2. **Installer les dépendances de l'application Node** et **générer la doc swagger**
-
-~~~bash
-pushd api
-npm install
-npm run swagger-autogen
-popd
-~~~
-
-3. **Démarrer le projet** en mode développement (watch des sources)
+2. **Démarrer le projet** en mode développement (watch des sources)
 
 ~~~bash
 docker compose watch
@@ -68,7 +58,7 @@ docker compose watch
 
 Pour démarrer le projet *sans watch des sources*:
 
-~~~
+~~~bash
 docker compose up -d
 ~~~
 
@@ -94,7 +84,6 @@ mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
 ~~~
 
 >*Machine hôte* : la machine sur laquelle s’exécute les conteneurs Docker, *votre* machine
-
 
 Puis, dans le repl MySQL (session ouverte avec la commande précédente)
 
@@ -180,43 +169,33 @@ docker logs -f demo-rest-api-api
 
 ## Documentation de l'API avec Swagger
 
-Générer automatiquement la documentation de vos routes avec le module [swagger-autogen](https://www.npmjs.com/package/swagger-autogen) (déjà installé)
-
-Placez-vous dans le dossier `api` puis
+(Re)générer la documentation de vos routes avec le module [swagger-autogen](https://www.npmjs.com/package/swagger-autogen) (déjà installé):
 
 ~~~bash
-node swagger.js
-~~~
-
-ou
-
-~~~bash
-npm run swagger-autogen
+docker exec -it demo-rest-api-api npm run swagger-autogen
 ~~~
 
 Se rendre à l'URL `/doc` pour accéder à l'UI de Swagger et à la documentation interactive de votre API.
 
-## Installer et servir de nouvelles dépendances
+## Installer de nouvelles dépendances, inspecter les dépendances
 
 Vous pouvez installer de nouvelles dépendances au besoin. À la racine de l'application, installer les dépendances désirées *via* `npm`:
 
-~~~
-pushd api
-npm install <votre paquet>
-popd
+~~~bash
+docker exec -it demo-rest-api-api npm install <le nom du paquet>
 ~~~
 
-> Inutile de redémarrer le conteneur, `api` est un chemin monté sur le conteneur.
+Lister les dépendances du projet Node:
+
+~~~bash
+docker exec -it demo-rest-api-api npm list
+~~~
 
 ## Arrêter le projet
 
 ~~~bash
 docker compose down
 ~~~
-
-## Améliorations
-
-Se débarrasser des étapes *avant* la dockerisation du projet (installation des dépendances). Le problème réside dans le fait que le volume monté *écrase* les fichiers lors de la construction de l'image. On ne peut donc pas en l'état simplement les déplacer dans l'image Docker.
 
 ## Conseils pour le développement
 
