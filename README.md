@@ -6,10 +6,10 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Prérequis](#prérequis)
   - [Lancer le projet avec Compose](#lancer-le-projet-avec-compose)
   - [Tester](#tester)
-    - [API](#api)
-    - [Base de données](#base-de-données)
+    - [L'API](#lapi)
+    - [La base de données](#la-base-de-données)
     - [Client graphique Adminer pour la base de données MySQL](#client-graphique-adminer-pour-la-base-de-données-mysql)
-  - [Base de données](#base-de-données-1)
+  - [Base de données](#base-de-données)
     - [ORM](#orm)
   - [Debuger lors du développement](#debuger-lors-du-développement)
     - [En ligne de commande avec docker](#en-ligne-de-commande-avec-docker)
@@ -64,18 +64,17 @@ docker compose up -d
 
 ## Tester
 
-### API
+### L'API
 
 Se rendre à l'URL [localhost:5001](http://localhost:5001), ou tester (avec [curl](https://curl.se/))
 
-~~~
-# Web humain (HTML)
-curl --include localhost:5001
-# API (JSON)
-curl localhost:5001
+~~~bash
+curl -i localhost:5001
 ~~~
 
-### Base de données
+Vous devriez voir une page HTML qui affiche des données de users issues de mysql.
+
+### La base de données
 
 Avec le client mysql (depuis la machine hôte) :
 
@@ -104,7 +103,7 @@ mysql -uroot -p -Dmydb -h127.0.0.1 -P5002 < script.sql
 
 ### Client graphique Adminer pour la base de données MySQL
 
-Le starterpack vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données avec interface graphique, simple et puissant.
+Le projet vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données avec interface graphique, simple et puissant.
 
 Se rendre sur l'URL [http://localhost:5003](http://localhost:5003) (par défaut) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut).
 
