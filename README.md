@@ -198,14 +198,14 @@ docker compose down
 
 ## Conseils pour le développement
 
-- Ouvrez une connexion MySQL pendant votre développement pour tester vos requêtes *avant* de les intégrer dans voter code
-- Utiliser cURL pour tester rapidement vos requêtes HTTP. Ouvrez par exemple deux terminaux, l'un avec cURL et l'autre avec les logs de l'API pour débuger facilement votre système
-- Installer le module `dotenv` pour placer le DSN (informations de connexion à la base) en dehors du code
-- Pour tester des enchaînements de requêtes, écrivez un script SQL capable de remettre la base dans un état initial et contenant les requêtes à tester et un autre script pour effectuer les requêtes HTTP, et exécuter le tout en *une commande*
+- Ouvrez une connexion MySQL pendant votre développement pour tester vos requêtes *avant* de les intégrer dans votre code;
+- Utiliser cURL pour tester rapidement vos requêtes HTTP. 
+- Ouvrez deux terminaux: l'un avec cURL et l'autre avec les logs de l'API pour débuger facilement votre système;
+- Installer le module `dotenv` pour placer le DSN (informations de connexion à la base) en dehors du code;
+- Pour tester des enchaînements de requêtes, écrivez un script SQL pour remettre la base dans un état initial et contenant les requêtes à tester, un script pour effectuer les requêtes HTTP avec cURL, et exécuter le tout en **une commande** (en vous servant de l'opérateur du shell `&&`).
 
 ## Modules Node.Js notables
 
-- [bodyParser](https://www.npmjs.com/package/body-parser), un parser du corps de requête pour les applications node. On s'en sert pour parser les représentations envoyées par le client dans nos contrôleurs avec l'instruction `app.use(bodyParser.urlencoded({ extended: true }));`
 - [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), une implémentation javascript du standard JSON Web Token, voir [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)
 - [cors](https://www.npmjs.com/package/cors), un module middleware pour gérer la politique CORS (*Cross Origin Resource Sharing*)
 - [mysql2](https://www.npmjs.com/package/mysql2), un client MySQL pour Node.js qui [utilise l'API des promesses](https://www.npmjs.com/package/mysql2#using-promise-wrapper) (contrairement à son prédécesseur [mysql](https://www.npmjs.com/package/mysql))
@@ -235,12 +235,12 @@ Pour **autoriser** (et donc authentifier) l'utilisateur à interagir avec les re
 ### Swagger
 
 - [Swagger UI](https://github.com/swagger-api/swagger-ui), documenter une web API RESTful (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*)
-- [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module node.js pour générer la documentation de l'API avec Express
+- [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module Node.js pour générer la documentation de l'API avec Express
 - [Swagger auto-gen](https://www.npmjs.com/package/swagger-autogen), module de génération *automatique* de la documentation de l'API dans une application node.js/Express. Voir notamment la documentation pour documenter automatiquement les endpoints (résumé, description, paramètres)
 - [Swagger auto-gen: décrire des paramètres de formulaire POST](https://www.npmjs.com/package/swagger-autogen#parameters)
 - [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification), un standard de description d'une web API comptabile avec REST
 
-### SGBDR
+### SGBDR et ORM
 
 - [MySQL Docker Image, quick reference](https://hub.docker.com/_/mysql/)
 - [mysql2](https://www.npmjs.com/package/mysql2), le driver node.js pour le SGBDR MySQL qui implémente l'API des promesses (contrairement à [mysql](https://www.npmjs.com/package/mysql))
