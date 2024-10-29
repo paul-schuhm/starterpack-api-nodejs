@@ -60,10 +60,16 @@ npm run swagger-autogen
 popd
 ~~~
 
-3. **Démarrer le projet**
+3. **Démarrer le projet** en mode développement (watch des sources)
+
+~~~bash
+docker compose watch
+~~~
+
+Pour démarrer le projet *sans watch des sources*:
 
 ~~~
-docker-compose up -d
+docker compose up -d
 ~~~
 
 ## Tester

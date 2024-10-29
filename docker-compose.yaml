@@ -5,8 +5,15 @@ services:
       context: ./
       dockerfile: Dockerfile
     restart: always
-    volumes:
-      - ./api:/usr/src/app:rw
+    develop:
+      watch:
+        - path: ./api/
+          action: sync
+          target: /usr/src/app
+          ignore:
+            - node_modules/
+    # volumes:
+    #   - ./api:/usr/src/app:rw
     container_name: ${PROJECT_NAME}-api
     ports:
       - ${HOST_PORT_API}:3000
