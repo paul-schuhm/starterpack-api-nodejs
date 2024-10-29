@@ -1,6 +1,8 @@
-FROM node:19-alpine3.16
+FROM node:23-bullseye-slim
 
 WORKDIR /usr/src/app
+
+RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib/apt/lists/*
 
 COPY api/ .
 
