@@ -1,6 +1,5 @@
 # wait-for-db.sh
 #!/bin/sh
-set -e
 
 host="$1"
 shift
