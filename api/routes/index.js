@@ -9,6 +9,7 @@ router.get('/', async function (req, res, next) {
 
   const conn = await db.mysql.createConnection(db.dsn);
 
+
   try {
     
     const [rows] = await conn.execute('SELECT * FROM User');
@@ -18,7 +19,7 @@ router.get('/', async function (req, res, next) {
         firstName: element.first_name
       }
     });
-    res.render('index', { title: 'RESTful web api', 'users': users });
+    res.render('index', { title: 'RESTful web api change', 'users': users });
 
   } catch (error) {
     console.error('Error connecting: ' + error.stack);

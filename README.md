@@ -50,11 +50,7 @@ cp .env.dist .env
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
-2. **Démarrer le projet** en mode développement (watch des sources)
-
-~~~bash
-docker compose watch
-~~~
+2. **Démarrer le projet**:
 
 Pour démarrer le projet *sans watch des sources*:
 

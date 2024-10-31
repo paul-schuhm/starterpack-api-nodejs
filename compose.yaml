@@ -12,7 +12,7 @@ services:
       - ${HOST_PORT_API}:3000
     depends_on:
       - db  
-    command: ["sh", "./setup-dep-and-wait-for-db.sh", "db", "node", "--watch", "./bin/www"]
+    command: ["sh", "./setup-dep-and-wait-for-db.sh"]
   db:
     image: mysql:8
     restart: always
