@@ -48,8 +48,6 @@ cp .env.dist .env
 
 2. **Démarrer le projet** :
 
-Pour démarrer le projet:
-
 ~~~bash
 docker compose watch
 ~~~
