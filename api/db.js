@@ -23,7 +23,7 @@ async function testConnexion() {
     console.log(res)
 }
 
-testConnexion();
+// testConnexion();
 
 
 module.exports = { dsn, mysql }

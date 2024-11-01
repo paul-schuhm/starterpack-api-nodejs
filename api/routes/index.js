@@ -19,7 +19,7 @@ router.get('/', async function (req, res, next) {
         firstName: element.first_name
       }
     });
-    res.render('index', { title: 'RESTful web api change', 'users': users });
+    res.render('index', { title: "Kit de développement RESTful Web API", 'users': users });
 
   } catch (error) {
     console.error('Error connecting: ' + error.stack);

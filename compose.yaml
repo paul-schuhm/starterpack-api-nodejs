@@ -5,6 +5,8 @@ services:
       context: ./
       dockerfile: Dockerfile
     restart: always
+    labels:
+      - "autoheal=true"
     develop:
       watch:
         - path: ./api/
@@ -15,7 +17,13 @@ services:
       - ${HOST_PORT_API}:3000
     depends_on:
       - db  
-    command: ["sh", "./setup-dep-and-wait-for-db.sh"]
+    healthcheck:
+        test: ["CMD", "mysqladmin", "-hdb", "-P3306", "ping", "--silent"]
+        timeout: 3s
+        interval: 4s
+        retries: 10
+    command: ["./node_modules/nodemon/bin/nodemon.js", "./bin/www"]
+
   db:
     image: mysql:8
     restart: always
