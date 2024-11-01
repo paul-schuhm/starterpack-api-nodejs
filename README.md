@@ -15,7 +15,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
   - [Installer de nouvelles dépendances, inspecter les dépendances](#installer-de-nouvelles-dépendances-inspecter-les-dépendances)
   - [Conseils pour le développement](#conseils-pour-le-développement)
-  - [Modules Node.Js notables](#modules-nodejs-notables)
+  - [Modules Node.js installés](#modules-nodejs-installés)
   - [Ressources](#ressources)
     - [Docker](#docker)
     - [Express](#express)
@@ -176,11 +176,12 @@ docker exec -it demo-rest-api-api npm list
 - Installer le module `dotenv` pour placer le DSN (informations de connexion à la base) en dehors du code;
 - Pour tester des enchaînements de requêtes, écrivez un script SQL pour remettre la base dans un état initial et contenant les requêtes à tester, un script pour effectuer les requêtes HTTP avec cURL, et exécuter le tout en **une commande** (en vous servant de l'opérateur du shell `&&`).
 
-## Modules Node.Js notables
+## Modules Node.js installés
 
-- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), une implémentation javascript du standard JSON Web Token, voir [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519)
-- [cors](https://www.npmjs.com/package/cors), un module middleware pour gérer la politique CORS (*Cross Origin Resource Sharing*)
-- [mysql2](https://www.npmjs.com/package/mysql2), un client MySQL pour Node.js qui [utilise l'API des promesses](https://www.npmjs.com/package/mysql2#using-promise-wrapper) (contrairement à son prédécesseur [mysql](https://www.npmjs.com/package/mysql))
+- [express](https://expressjs.com/) ;
+- [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken), une implémentation javascript du standard JSON Web Token, voir [RFC 7519](https://www.rfc-editor.org/rfc/rfc7519) ;
+- [cors](https://www.npmjs.com/package/cors), un module middleware pour gérer la politique CORS (*Cross Origin Resource Sharing*) ;
+- [mysql2](https://www.npmjs.com/package/mysql2), un client MySQL pour Node.js qui [utilise l'API des promesses](https://www.npmjs.com/package/mysql2#using-promise-wrapper) (contrairement à son prédécesseur [mysql](https://www.npmjs.com/package/mysql)) ;
 
 
 ## Ressources
