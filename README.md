@@ -11,7 +11,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Accéder à la base de données](#accéder-à-la-base-de-données)
     - [avec Adminer](#avec-adminer)
     - [avec le client mysql depuis votre machine hôte](#avec-le-client-mysql-depuis-votre-machine-hôte)
-    - [Depuis un autre conteneur](#depuis-un-autre-conteneur)
+    - [depuis un autre conteneur](#depuis-un-autre-conteneur)
   - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
   - [Installer de nouvelles dépendances, inspecter les dépendances](#installer-de-nouvelles-dépendances-inspecter-les-dépendances)
   - [Conseils pour le développement](#conseils-pour-le-développement)
@@ -111,7 +111,7 @@ SELECT * FROM User;
 
 > **Préférer utiliser l'adresse IP `127.0.0.1` plutôt que son alias `localhost`** afin éviter des potentiels conflits de configuration avec le fichier [socket](https://www.jetbrains.com/help/datagrip/how-to-connect-to-mysql-with-unix-sockets.html) du serveur MySQL potentiellement installé sur votre machine hôte.
 
-### Depuis un autre conteneur
+### depuis un autre conteneur
 
 Le nom de l'hôte est `db`, le nom du service sur le réseau Docker.
 
