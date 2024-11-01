@@ -4,33 +4,29 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
 
 - [Starter pack: *RESTful* web API avec Node.js, Express.js, MySQL et Adminer](#starter-pack-restful-web-api-avec-nodejs-expressjs-mysql-et-adminer)
   - [Prérequis](#prérequis)
-  - [Lancer le projet avec Compose](#lancer-le-projet-avec-compose)
+  - [Lancer le projet](#lancer-le-projet)
+  - [Arrêter le projet](#arrêter-le-projet)
   - [Tester](#tester)
-    - [L'API](#lapi)
-    - [La base de données](#la-base-de-données)
-    - [Client graphique Adminer pour la base de données MySQL](#client-graphique-adminer-pour-la-base-de-données-mysql)
-  - [Base de données](#base-de-données)
-    - [ORM](#orm)
-  - [Debuger lors du développement](#debuger-lors-du-développement)
-    - [En ligne de commande avec docker](#en-ligne-de-commande-avec-docker)
-    - [Avec Visual Studio Code](#avec-visual-studio-code)
+    - [La base de données MySQL](#la-base-de-données-mysql)
+  - [Accéder à la base de données](#accéder-à-la-base-de-données)
+    - [Avec Adminer](#avec-adminer)
+    - [Avec le client mysql depuis votre machine hôte](#avec-le-client-mysql-depuis-votre-machine-hôte)
+    - [Depuis un autre conteneur](#depuis-un-autre-conteneur)
   - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
   - [Installer de nouvelles dépendances, inspecter les dépendances](#installer-de-nouvelles-dépendances-inspecter-les-dépendances)
-  - [Arrêter le projet](#arrêter-le-projet)
   - [Conseils pour le développement](#conseils-pour-le-développement)
   - [Modules Node.Js notables](#modules-nodejs-notables)
-  - [Autorisation avec JWT](#autorisation-avec-jwt)
   - [Ressources](#ressources)
     - [Docker](#docker)
     - [Express](#express)
     - [Swagger](#swagger)
-    - [SGBDR](#sgbdr)
+    - [SGBDR et ORM](#sgbdr-et-orm)
     - [Adminer](#adminer)
 
 
 ## Prérequis
 
-- Installer [Docker](https://www.docker.com/get-started/) et [Compose](https://docs.docker.com/compose/)
+- Installer [Docker](https://www.docker.com/get-started/);
 - [Cloner le dépôt](https://github.com/paul-schuhm/starterpack-api-nodejs) et se placer à la racine du projet;
 
 >N'oubliez pas de supprimer le dossier `.git` si vous désirez créer votre propre dépôt à partir des sources
@@ -40,7 +36,7 @@ rm -R .git
 git init
 ~~~
 
-## Lancer le projet avec Compose
+## Lancer le projet
 
 1. **Dupliquer** le fichier `.env.dist`
 
@@ -52,15 +48,21 @@ cp .env.dist .env
 
 2. **Démarrer le projet**:
 
-Pour démarrer le projet *sans watch des sources*:
+Pour démarrer le projet:
 
 ~~~bash
-docker compose up -d
+docker compose watch
+~~~
+
+> Les sources JavaScript sont *watchées*, l'application Node redémarre à chaque édition des sources.
+
+## Arrêter le projet
+
+~~~bash
+docker compose down
 ~~~
 
 ## Tester
-
-### L'API
 
 Se rendre à l'URL [localhost:5001](http://localhost:5001), ou tester (avec [curl](https://curl.se/))
 
@@ -70,9 +72,27 @@ curl -i localhost:5001
 
 Vous devriez voir une page HTML qui affiche des données de users issues de mysql.
 
-### La base de données
+> Attendez quelques secondes que le serveur MySQL soit prêt à accepter des requêtes
 
-Avec le client mysql (depuis la machine hôte) :
+### La base de données MySQL
+
+>Penser à modifier la valeur du port si vous l'avez changé dans le `.env`
+
+La base de données vient avec deux utilisateurs :
+
+- `root` (administrateur), mot de passe : `root`
+- `user` (utilisateur lambda), mot de passe : `password`
+
+
+## Accéder à la base de données
+
+### Avec Adminer
+
+Le projet vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données avec interface graphique, simple et puissant.
+
+Se rendre sur l'URL [http://localhost:5003](http://localhost:5003) (par défaut) et se connecter avec les credentials root ou user.
+
+### Avec le client mysql depuis votre machine hôte
 
 ~~~bash
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
@@ -89,31 +109,12 @@ SELECT user FROM mysql.user;
 SELECT * FROM User;
 ~~~
 
-Pour exécuter un script SQL en *Batch mode*
+> **Préférer utiliser l'adresse IP `127.0.0.1` plutôt que son alias `localhost`** afin éviter des potentiels conflits de configuration avec le fichier [socket](https://www.jetbrains.com/help/datagrip/how-to-connect-to-mysql-with-unix-sockets.html) du serveur MySQL potentiellement installé sur votre machine hôte.
 
-~~~bash
-mysql -uroot -p -Dmydb -h127.0.0.1 -P5002 < script.sql
-~~~
+### Depuis un autre conteneur
 
->Penser à modifier la valeur du port si vous l'avez changé dans le `.env`
+Le nom de l'hôte est `db`, le nom du service sur le réseau Docker.
 
-### Client graphique Adminer pour la base de données MySQL
-
-Le projet vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données avec interface graphique, simple et puissant.
-
-Se rendre sur l'URL [http://localhost:5003](http://localhost:5003) (par défaut) et se connecter avec les credentials *root* (login *root* et mot de passe *root* par défaut), ou ceux de l'utilisateur (`user` et `password` par défaut).
-
-## Base de données
-
-La base de données vient avec deux utilisateurs par défaut :
-
-- `root` (administrateur), mot de passe : `root`
-- `user` (utilisateur lambda), mot de passe : `password`
-
-Pour accéder à la base de données:
-
-- *Depuis* un autre conteneur (Node.js, Adminer) : `host` est `db`, le nom du service sur le réseau Docker;
-- *Depuis* la machine hôte (une application node, PHP exécutée sur votre machine, etc.) : `host` est `localhost` ou `127.0.0.1`. **Préférer utiliser l'adresse IP `127.0.0.1` plutôt que son alias `localhost`** afin éviter des potentiels conflits de configuration avec le fichier [socket](https://www.jetbrains.com/help/datagrip/how-to-connect-to-mysql-with-unix-sockets.html) du serveur MySQL potentiellement installé sur votre machine hôte.
 
 <!-- 
 Depuis un script PHP sur la machine hote : 
@@ -142,26 +143,6 @@ Lorsque vous utilisez "127.0.0.1" comme hôte, PDO se connecte à MySQL en utili
 En conclusion : préférer utiliser 127.0.0.1 plutot que localhost pout s'épargner des conflits de configuration et être sûr de requêter le serveur MySQL conteneurisé.
  -->
 
-### ORM
-
-Pour interagir avec la base de données SQL, nous pouvons utiliser l'ORM [Sequelize](https://sequelize.org)
-
-## Debuger lors du développement
-
-Inspecter les *logs* du conteneur Docker qui contiennent tout ce qui est écrit sur la sortie standard (avec `console.log()`). Les sources de l'application Node.js sont *watchées*, donc à chaque modification d'un fichier source l'application redémarre pour les prendre en compte automatiquement
-
-### En ligne de commande avec docker
-
-~~~bash
-#Suivi en temps réel des logs
-docker logs -f demo-rest-api-api 
-~~~
-
-### Avec Visual Studio Code
-
-- Installer l'[extension officielle Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
-- Click droit sur le conteneur `demo-rest-api-api` qui héberge l'application Node.js,  puis `View Logs`
-
 ## Documentation de l'API avec Swagger
 
 (Re)générer la documentation de vos routes avec le module [swagger-autogen](https://www.npmjs.com/package/swagger-autogen) (déjà installé):
@@ -186,14 +167,11 @@ Lister les dépendances du projet Node:
 docker exec -it demo-rest-api-api npm list
 ~~~
 
-## Arrêter le projet
 
-~~~bash
-docker compose down
-~~~
 
 ## Conseils pour le développement
 
+- Débuger: Inspecter les *logs* du conteneur Docker (`docker logs -f demo-rest-api-api`, ou via Docker Desktop ou via l'[extension officielle Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)) qui contiennent tout ce qui est écrit sur la sortie standard (avec `console.log()`). Les sources de l'application Node.js sont *watchées*, donc à chaque modification d'un fichier source l'application redémarre pour les prendre en compte automatiquement ;
 - Ouvrez une connexion MySQL pendant votre développement pour tester vos requêtes *avant* de les intégrer dans votre code;
 - Utiliser cURL pour tester rapidement vos requêtes HTTP. 
 - Ouvrez deux terminaux: l'un avec cURL et l'autre avec les logs de l'API pour débuger facilement votre système;
@@ -206,11 +184,6 @@ docker compose down
 - [cors](https://www.npmjs.com/package/cors), un module middleware pour gérer la politique CORS (*Cross Origin Resource Sharing*)
 - [mysql2](https://www.npmjs.com/package/mysql2), un client MySQL pour Node.js qui [utilise l'API des promesses](https://www.npmjs.com/package/mysql2#using-promise-wrapper) (contrairement à son prédécesseur [mysql](https://www.npmjs.com/package/mysql))
 
-## Autorisation avec JWT
-
->JSON Web Token (JWT) is a compact, URL-safe means of *representing claims to be transferred between two parties* (Source: RFC7519)
-
-Pour **autoriser** (et donc authentifier) l'utilisateur à interagir avec les ressources, on utilise un JSON Web Token. Implémentée dans le projet avec le package [jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 
 ## Ressources
 
