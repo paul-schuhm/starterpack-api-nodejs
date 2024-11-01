@@ -215,3 +215,8 @@ docker exec -it demo-rest-api-api npm list
 ### Adminer
 
 - [Adminer](https://www.adminer.org/)
+
+
+<!-- 
+Healhtcheck: ne redémarre pas le conteneur si unhealthy (valeur différente de 0). Sert juste à mettre la valeur d'un label. Ce label est utilisé par Swarm par exemple. Mais avec depends_on on peut ajouter un test de santé du conteneur dont ont dépend. https://docs.docker.com/reference/compose-file/services/#depends_on, https://docs.docker.com/reference/compose-file/services/#long-syntax-1
+ -->
