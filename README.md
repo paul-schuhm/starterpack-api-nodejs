@@ -38,7 +38,7 @@ git init
 
 ## Lancer le projet
 
-1. **Dupliquer** le fichier `.env.dist`
+1. **Dupliquer** le fichier `.env.dist` :
 
 ~~~bash
 cp .env.dist .env
@@ -46,7 +46,7 @@ cp .env.dist .env
 
 > Vous pouvez modifier les variables d'environnement si vous le souhaitez (des valeurs par défaut sont fournies)
 
-2. **Démarrer le projet**:
+2. **Démarrer le projet** :
 
 Pour démarrer le projet:
 
@@ -64,15 +64,15 @@ docker compose down
 
 ## Tester
 
-Se rendre à l'URL [localhost:5001](http://localhost:5001), ou tester (avec [curl](https://curl.se/))
+Se rendre à l'URL [localhost:5001](http://localhost:5001), ou avec [curl](https://curl.se/) :
 
 ~~~bash
 curl -i localhost:5001
 ~~~
 
-Vous devriez voir une page HTML qui affiche des données de users issues de mysql.
+Vous devriez voir une page HTML qui affiche des données issues de la base de données MySQL.
 
-> Attendez quelques secondes que le serveur MySQL soit prêt à accepter des requêtes
+> Attendez quelques secondes que le serveur MySQL soit prêt à accepter des requêtes.
 
 ### La base de données MySQL
 
@@ -167,11 +167,9 @@ Lister les dépendances du projet Node:
 docker exec -it demo-rest-api-api npm list
 ~~~
 
-
-
 ## Conseils pour le développement
 
-- Débuger: Inspecter les *logs* du conteneur Docker (`docker logs -f demo-rest-api-api`, ou via Docker Desktop ou via l'[extension officielle Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)) qui contiennent tout ce qui est écrit sur la sortie standard (avec `console.log()`). Les sources de l'application Node.js sont *watchées*, donc à chaque modification d'un fichier source l'application redémarre pour les prendre en compte automatiquement ;
+- **Débuger** : Inspecter les *logs* du conteneur Docker (`docker logs -f demo-rest-api-api`, ou via Docker Desktop ou via l'[extension officielle Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)) qui contiennent tout ce qui est écrit sur la sortie standard (avec `console.log()`). Les sources de l'application Node.js sont *watchées*, donc à chaque modification d'un fichier source l'application redémarre pour les prendre en compte automatiquement ;
 - Ouvrez une connexion MySQL pendant votre développement pour tester vos requêtes *avant* de les intégrer dans votre code;
 - Utiliser cURL pour tester rapidement vos requêtes HTTP. 
 - Ouvrez deux terminaux: l'un avec cURL et l'autre avec les logs de l'API pour débuger facilement votre système;
