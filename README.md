@@ -7,10 +7,10 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Lancer le projet](#lancer-le-projet)
   - [Arrêter le projet](#arrêter-le-projet)
   - [Tester](#tester)
-    - [La base de données MySQL](#la-base-de-données-mysql)
+  - [La base de données MySQL](#la-base-de-données-mysql)
   - [Accéder à la base de données](#accéder-à-la-base-de-données)
-    - [Avec Adminer](#avec-adminer)
-    - [Avec le client mysql depuis votre machine hôte](#avec-le-client-mysql-depuis-votre-machine-hôte)
+    - [avec Adminer](#avec-adminer)
+    - [avec le client mysql depuis votre machine hôte](#avec-le-client-mysql-depuis-votre-machine-hôte)
     - [Depuis un autre conteneur](#depuis-un-autre-conteneur)
   - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
   - [Installer de nouvelles dépendances, inspecter les dépendances](#installer-de-nouvelles-dépendances-inspecter-les-dépendances)
@@ -74,7 +74,7 @@ Vous devriez voir une page HTML qui affiche des données issues de la base de do
 
 > Attendez quelques secondes que le serveur MySQL soit prêt à accepter des requêtes.
 
-### La base de données MySQL
+## La base de données MySQL
 
 >Penser à modifier la valeur du port si vous l'avez changé dans le `.env`
 
@@ -86,13 +86,13 @@ La base de données vient avec deux utilisateurs :
 
 ## Accéder à la base de données
 
-### Avec Adminer
+### avec Adminer
 
 Le projet vient avec [Adminer](https://www.adminer.org/), un gestionnaire de base de données avec interface graphique, simple et puissant.
 
 Se rendre sur l'URL [http://localhost:5003](http://localhost:5003) (par défaut) et se connecter avec les credentials root ou user.
 
-### Avec le client mysql depuis votre machine hôte
+### avec le client mysql depuis votre machine hôte
 
 ~~~bash
 mysql -uroot -proot -Dmydb -h127.0.0.1 -P5002
