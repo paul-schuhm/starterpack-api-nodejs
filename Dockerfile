@@ -6,6 +6,7 @@ RUN apt-get update && apt-get install -y default-mysql-client && rm -rf /var/lib
 
 COPY api/ .
 
-RUN npm install
+RUN npm install && npm run swagger-autogen
+
 
 EXPOSE 3000
