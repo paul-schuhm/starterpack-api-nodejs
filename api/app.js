@@ -6,7 +6,7 @@ var logger = require('morgan');
 const swaggerUi = require('swagger-ui-express')
 const swaggerFile = require('./swagger_output.json')
 var indexRouter = require('./routes/index');
-
+require('dotenv').config()
 
 var app = express();
 
@@ -20,6 +20,20 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+
+//Enregistrement d'un middleware actif uniquement en env de dev
+//Si on veut autoriser une application web à lire la réponse,
+//il faut moduler la SOP avec une politique CORS plus permissive.
+//Autoriser les requêtes Cross Origin (CORS Policy)
+if (process.env && process.env.ENV == 'dev') {
+  app.use((req, res, next) => {
+    //En production, on n'autorisera pas l'accès aux autres sites web à notre API ainsi, sans aucune restriction
+    res.setHeader('Access-Control-Allow-Origin', '*');
+    next();
+  })
+}
+
 /**
  * Enregistrement des routes
  */
@@ -27,7 +41,7 @@ app.use('/', indexRouter);
 
 
 /**
- * Configuration Swagger, exposition de la doc sur la route /doc
+ * Configuration Swagger, exposition de l'OpenAPI Specification Document (OAD) générée sur la route /doc
  */
 app.use('/doc', swaggerUi.serve, swaggerUi.setup(swaggerFile))
 
