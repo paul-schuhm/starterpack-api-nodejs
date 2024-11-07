@@ -206,6 +206,8 @@ docker exec -it demo-rest-api-api npm list
 - [Swagger auto-gen: décrire des paramètres de formulaire POST](https://www.npmjs.com/package/swagger-autogen#parameters)
 - [The OpenAPI Specification Explained](https://learn.openapis.org/specification/), **le guide**
 - [OpenAPI Specification](https://spec.openapis.org/oas/v3.1.0#openapi-specification), **la référence complète**, pour décrire votre API au format YAML ou JSON; 
+- [Documentation de swagger auto-gen](https://swagger-autogen.github.io/docs/getting-started/), documentation sur les tags à inclure dans les sources pour générer l'OpenAPI Description fil. Attention à [bien utiliser la version OpenAPI 3.x](https://swagger-autogen.github.io/docs/openapi-3/)
+
 
 ### SGBDR et ORM
 
