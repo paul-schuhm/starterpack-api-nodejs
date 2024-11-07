@@ -12,7 +12,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
     - [avec Adminer](#avec-adminer)
     - [avec le client mysql depuis votre machine hôte](#avec-le-client-mysql-depuis-votre-machine-hôte)
     - [depuis un autre conteneur](#depuis-un-autre-conteneur)
-  - [Documentation de l'API avec Swagger](#documentation-de-lapi-avec-swagger)
+  - [Génération de la documentation OpenAPI avec swagger](#génération-de-la-documentation-openapi-avec-swagger)
   - [Installer de nouvelles dépendances, inspecter les dépendances](#installer-de-nouvelles-dépendances-inspecter-les-dépendances)
   - [Conseils pour le développement](#conseils-pour-le-développement)
   - [Modules Node.js installés](#modules-nodejs-installés)
@@ -141,15 +141,15 @@ Lorsque vous utilisez "127.0.0.1" comme hôte, PDO se connecte à MySQL en utili
 En conclusion : préférer utiliser 127.0.0.1 plutot que localhost pout s'épargner des conflits de configuration et être sûr de requêter le serveur MySQL conteneurisé.
  -->
 
-## Documentation de l'API avec Swagger
+## Génération de la documentation OpenAPI avec swagger
 
-(Re)générer la documentation de vos routes avec le module [swagger-autogen](https://www.npmjs.com/package/swagger-autogen) (déjà installé):
+(Re)générer la documentation interactive de votre API avec le module [swagger-autogen](https://www.npmjs.com/package/swagger-autogen) (déjà installé):
 
 ~~~bash
 docker exec -it demo-rest-api-api npm run swagger-autogen
 ~~~
 
-Se rendre à l'URL `/doc` pour accéder à l'UI de Swagger et à la documentation interactive de votre API.
+Se rendre à l'URL `/doc` pour accéder à Swagger UI et à la documentation interactive de votre API.
 
 ## Installer de nouvelles dépendances, inspecter les dépendances
 
