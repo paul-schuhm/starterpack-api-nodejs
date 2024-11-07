@@ -19,7 +19,7 @@ Un *starter pack* dockerisé d'une application web node.js pour développer une 
   - [Ressources](#ressources)
     - [Docker](#docker)
     - [Express](#express)
-    - [Swagger](#swagger)
+    - [Spécification OpenAPI et suite d'outils Swagger](#spécification-openapi-et-suite-doutils-swagger)
     - [SGBDR et ORM](#sgbdr-et-orm)
     - [Adminer](#adminer)
 
@@ -198,7 +198,7 @@ docker exec -it demo-rest-api-api npm list
 - [Pug](https://pugjs.org/api/getting-started.html), moteur de templates javascript installé par défaut avec Express
 - [API JSON Web Token Authentication (JWT) sur Express.js](https://etienner.github.io/api-json-web-token-authentication-jwt-sur-express-js/), un bon tutoriel pour mettre en place des routes protégées par Json Web Token
 
-### Swagger
+### Spécification OpenAPI et suite d'outils Swagger
 
 - [Swagger UI](https://swagger.io/tools/swagger-ui/), servir une documentation web interactive de l'API à partir de [sa description OpenAPi](https://spec.openapis.org/oas/v3.1.0#openapi-specification) (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*, c'est toujours appréciable)
 - [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module Node.js pour intégrer Swagger UI à un projet Node.js;
