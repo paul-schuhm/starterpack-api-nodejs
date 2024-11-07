@@ -159,6 +159,12 @@ Vous pouvez installer de nouvelles dépendances au besoin. À la racine de l'app
 docker exec -it demo-rest-api-api npm install <le nom du paquet>
 ~~~
 
+ou directement sur la machine hôte (changements seront repercutés par le watch des sources):
+
+~~~bash
+npm install <le nom du paquet>
+~~~
+
 Lister les dépendances du projet Node:
 
 ~~~bash
