@@ -200,11 +200,12 @@ docker exec -it demo-rest-api-api npm list
 
 ### Swagger
 
-- [Swagger UI](https://github.com/swagger-api/swagger-ui), documenter une web API RESTful (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*)
-- [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module Node.js pour générer la documentation de l'API avec Express
-- [Swagger auto-gen](https://www.npmjs.com/package/swagger-autogen), module de génération *automatique* de la documentation de l'API dans une application node.js/Express. Voir notamment la documentation pour documenter automatiquement les endpoints (résumé, description, paramètres)
+- [Swagger UI](https://swagger.io/tools/swagger-ui/), servir une documentation web interactive de l'API à partir de [sa description OpenAPi](https://spec.openapis.org/oas/v3.1.0#openapi-specification) (même si elle devrait être *par définition* auto-documentée et *auto-descriptive*, c'est toujours appréciable)
+- [Swagger UI Express](https://www.npmjs.com/package/swagger-ui-express), module Node.js pour intégrer Swagger UI à un projet Node.js;
+- [Swagger auto-gen](https://www.npmjs.com/package/swagger-autogen), module de génération *automatique* de la description OpenAPI de l'API à partir des métadonnées placées dans les sources d'une application Node.js/Express;
 - [Swagger auto-gen: décrire des paramètres de formulaire POST](https://www.npmjs.com/package/swagger-autogen#parameters)
-- [OpenAPI Specification](https://github.com/OAI/OpenAPI-Specification), un standard de description d'une web API comptabile avec REST
+- [The OpenAPI Specification Explained](https://learn.openapis.org/specification/), **le guide**
+- [OpenAPI Specification](https://spec.openapis.org/oas/v3.1.0#openapi-specification), **la référence complète**, pour décrire votre API au format YAML ou JSON; 
 
 ### SGBDR et ORM
 
